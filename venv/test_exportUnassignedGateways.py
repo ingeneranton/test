@@ -4,7 +4,6 @@ import mapstorage_api_pb2_grpc
 import testdata_load
 
 def run():
-    "The run method, that sends gRPC conformant messsages to the server"
 
     with grpc.insecure_channel("localhost:9999") as channel:
         stub = mapstorage_api_pb2_grpc.MapExporterStub(channel)
@@ -20,7 +19,7 @@ def run():
 
 
 def close(channel):
-    "Close the channel"
+
     channel.close()
 
 

@@ -1,4 +1,3 @@
-"""A module for runnin the client an N processes"""
 from multiprocessing import Process
 import test_1000calls
 

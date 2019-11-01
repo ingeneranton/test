@@ -1,4 +1,3 @@
-"""The Python implementation of the GRPC Seans-gRPC server."""
 from concurrent import futures
 import threading
 import time
@@ -9,7 +8,6 @@ import testdata_load
 
 
 class Listener(mapstorage_api_pb2_grpc.MapExporterServicer):
-    """The listener function implemests the rpc call as described in the .proto file"""
 
     def __init__(self):
         self.requestId = 0
@@ -19,7 +17,6 @@ class Listener(mapstorage_api_pb2_grpc.MapExporterServicer):
         return self.__class__.__name__
 
     def exportCampus(self,request, context):
-        #print(self.requestId)
         return mapstorage_api_pb2.CampusExport(campus=testdata_load.data())
 
     def importCampus(self, request, context):
@@ -40,8 +37,6 @@ class Listener(mapstorage_api_pb2_grpc.MapExporterServicer):
 
 
 def serve():
-    """The main serve function of the server.
-    This opens the socket, and listens for incoming grpc conformant packets"""
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=50))
     mapstorage_api_pb2_grpc.add_MapExporterServicer_to_server(Listener(), server)

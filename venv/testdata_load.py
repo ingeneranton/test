@@ -57,7 +57,3 @@ def campusexport():
 def campus_input():
     campus_input = mapstorage_api_pb2.CampusInput().code = '1711'
     return campus_input
-
-#print(campus_input())
-#print(data())
-#print(campusexport())
