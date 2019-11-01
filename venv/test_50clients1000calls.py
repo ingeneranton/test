@@ -1,6 +1,7 @@
 from multiprocessing import Process
 import test_1000calls
 
+
 if __name__ == "__main__":
     COUNT = 50
     PROCESSES = {}
