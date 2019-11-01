@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.simplinic.map.storage.export";
+
+package mapexporter;
+
+service MapExporter {
+  rpc importCampus(Campus)                  returns (CampusImport) {} // DEADLINE
+  rpc exportUnassignedGateways(CampusInput) returns (UnassignedGateways) {}
+  rpc exportCampus(CampusInput)             returns (CampusExport) {}
+}
+
+// Model
+message Campus {
+  string   id                 = 1;
+  string   organizationCode   = 2;
+  string   name               = 3;
+  string   code               = 4;
+  repeated Building buildings = 5;
+}
+
+message Building {
+  string   id           = 1;
+  string   name         = 2;
+  repeated Floor floors = 3;
+}
+
+message Floor {
+  string   id                    = 1;
+  string   name                  = 2;
+  int32    level                 = 3;
+  repeated Room roomsWithoutWard = 4;
+  repeated Ward wards            = 5;
+}
+
+message Ward {
+  string   id         = 1;
+  string   name       = 2;
+  repeated Room rooms = 3;
+}
+
+message Room {
+  string   id                               = 1;
+  string   name                             = 2;
+  int32    type                             = 3;
+  repeated Site sites                       = 4;
+  repeated GatewayPosition gatewayPositions = 5;
+}
+
+message Site {
+  string id   = 1;
+  string name = 2;
+  int32  type = 3;
+}
+
+message GatewayPosition {
+  string code = 1;
+}
+
+// Input
+message CampusInput {
+  string code = 1;
+}
+
+// Response
+message CampusImport {
+  string          requestId = 1;
+  repeated string report    = 2;
+}
+
+message UnassignedGateways {
+  string          requestId   = 1;
+  repeated string gatewayCode = 2;
+}
+
+message CampusExport {
+  string requestId = 1;
+  Campus campus    = 2;
+}
